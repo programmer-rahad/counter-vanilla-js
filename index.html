@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter (Thursday 02-Septempber-2021)</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #f1f5f8;
+        color: #222;
+      }
+      .counter {
+        text-align: center;
+        margin-top: 50vh;
+        transform: translateY(calc(-50% - 10px));
+      }
+      h3 {
+        font-size: 70px;
+        letter-spacing: 5px;
+      }
+      p {
+        font-size: 85px;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+      button {
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 3px solid #222;
+        letter-spacing: 2px;
+        font-weight: 300;
+        text-transform: uppercase;
+        padding: 8px 20px;
+        background-color: transparent;
+      }
+      button:hover {
+        color: #fff;
+        background-color: #222;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="counter">
+      <div class="container">
+        <div class="counter">
+          <h3>Counter</h3>
+          <p class="number">0</p>
+          <button>Decrease</button>
+          <button>Reset</button>
+          <button>Increase</button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let number = 0;
+      let minNum = -20;
+      let maxNum = 20;
+      const numberPara = document.querySelector('p.number');
+      const buttons = document.querySelectorAll('button');
+
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+          const thisParent = this.parentElement;
+          if (thisParent.children[2] === this) {
+            if (number === minNum) return;
+            number--;
+          } else if (thisParent.children[3] === this) {
+            number = 0;
+          } else {
+            if (number === maxNum) return;
+            number++;
+          }
+          numberPara.style.color = number > 0 ? 'green' : !number ? '#222' : 'red';
+          numberPara.innerText = number;
+        });
+      }
+    </script>
+  </body>
+</html>
