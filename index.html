@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Counter (Thursday 02-Septempber-2021)</title>
+    <title>Counter (Thursday, 24 June 2021)</title>
     <style>
       * {
         margin: 0;
@@ -12,76 +13,80 @@
         box-sizing: border-box;
       }
       body {
-        background-color: #f1f5f8;
-        color: #222;
-      }
-      .counter {
+        background-color: #eef4fa;
+        color: #122738;
+        display: flex;
+        justify-content: center;
+        height: 100vh;
         text-align: center;
-        margin-top: 50vh;
-        transform: translateY(calc(-50% - 10px));
-      }
-      h3 {
-        font-size: 70px;
-        letter-spacing: 5px;
-      }
-      p {
-        font-size: 85px;
-        font-weight: 700;
-        margin-bottom: 15px;
+        align-items: center;
       }
       button {
-        margin: 0 5px;
-        border-radius: 5px;
-        border: 3px solid #222;
-        letter-spacing: 2px;
-        font-weight: 300;
         text-transform: uppercase;
-        padding: 8px 20px;
-        background-color: transparent;
+        border: 1px solid;
+        border-radius: 4px;
+        letter-spacing: 1px; 
+        font-family: cursive;
+        font-size: 12px;
+        padding: 9px 25px;
+        cursor: pointer;
+        margin: 0 4px;
+        transition-duration: .5s;
       }
       button:hover {
-        color: #fff;
-        background-color: #222;
-        cursor: pointer;
+        font-weight: 800;
+        color: deeppink;
+      }
+      h2 {
+        font-family: Arial;
+      }
+      .number {
+        font-size: 80px;
+        font-weight: 700;
+        font-family: sans-serif;
+        margin-bottom: 20px;
       }
     </style>
   </head>
   <body>
-    <section id="counter">
-      <div class="container">
-        <div class="counter">
-          <h3>Counter</h3>
-          <p class="number">0</p>
-          <button>Decrease</button>
-          <button>Reset</button>
-          <button>Increase</button>
-        </div>
-      </div>
-    </section>
-
+    <div>
+      <h2 class="number">0</h2>
+      <button>Decrease</button>
+      <button>Reset</button>
+      <button>Increase</button>
+    </div>
     <script>
-      let number = 0;
-      let minNum = -20;
-      let maxNum = 20;
-      const numberPara = document.querySelector('p.number');
-      const buttons = document.querySelectorAll('button');
+      !(function () {
+        "use strict";
+        const $ = (selector, areAll) => {
+          const single = document.querySelector(selector);
+          const all = document.querySelectorAll(selector);
+          return areAll ? all : single;
+        };
+        // Variables
+        const number = $("h2.number");
+        const buttons = $("button", true);
+        let index = number.textContent;
 
-      for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function () {
-          const thisParent = this.parentElement;
-          if (thisParent.children[2] === this) {
-            if (number === minNum) return;
-            number--;
-          } else if (thisParent.children[3] === this) {
-            number = 0;
-          } else {
-            if (number === maxNum) return;
-            number++;
-          }
-          numberPara.style.color = number > 0 ? 'green' : !number ? '#222' : 'red';
-          numberPara.innerText = number;
-        });
-      }
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener("click", function () {
+            let target = event.target;
+            let text = target.textContent;
+
+            if (text === "Decrease") {
+              if (index === -20) return;
+              index--;
+            } else if (text === "Increase") {
+              if (index === 20) return;
+              index++;
+            } else {
+              index = 0;
+            }
+            number.textContent = index;
+            number.style.color = !index ? "" : index > 0 ? "green" : "red";
+          });
+        }
+      })();
     </script>
   </body>
 </html>
